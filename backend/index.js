@@ -1,10 +1,12 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors'); // Added for CORS
 const { Connection, PublicKey, Keypair, LAMPORTS_PER_SOL, Transaction, SystemProgram } = require('@solana/web3.js');
 const { TOKEN_PROGRAM_ID, getAssociatedTokenAddress, createTransferInstruction } = require('@solana/spl-token');
 const bs58 = require('bs58');
 const app = express();
 app.use(express.json());
+app.use(cors({ origin: 'https://strategicdegenreserve.netlify.app' })); // Restrict CORS to Netlify domain
 
 // Configuration
 const connection = new Connection(process.env.RPC_ENDPOINT, 'confirmed');
@@ -90,3 +92,8 @@ app.post('/distribute', async (req, res) => {
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Notes:
+// - Vulnerability Fix: Run 'npm audit fix' in backend/ to address 6 vulnerabilities (4 high, 2 critical).
+// - Range Fix: If using a random amount (previously mocked), replace with real logic or adjust as needed.
+// - Real Data: Update fetchHolders() with Pump.fun contract data when mint address is provided.

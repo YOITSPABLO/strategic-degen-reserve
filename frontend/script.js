@@ -7,12 +7,18 @@ const solTallyElement = document.querySelector('.sol-tally');
 let totalSolDistributed = 0;
 let walletIndex = 0;
 const wallets = ['Wallet1', 'Wallet2', 'Wallet3']; // Mock wallets for demo scanning
-const BACKEND_URL = 'https://solrewards-g4lv1ikh0-pablos-projects-26cc46ce.vercel.app'; // Update to Vercel URL (e.g., https://your-backend.vercel.app) after deployment
+const BACKEND_URL = 'https://solrewards-1x9y6amxi-pablos-projects-26cc46ce.vercel.app'; // Updated URL
+const BYPASS_TOKEN = '0QuZG5vQsYHZvaaGsOeNwoDS'; // Replace with your token
 
 // Fetch backend status
 async function fetchStatus() {
     try {
-        const response = await fetch(`${BACKEND_URL}/status`);
+        const response = await fetch(`${BACKEND_URL}/status?x-vercel-set-bypass-cookie=true&x-vercel-protection-bypass=${BYPASS_TOKEN}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         const data = await response.json();
         terminalOutput.innerHTML += `<p>[${new Date().toLocaleTimeString()}] Backend status: ${data.message}</p>`;
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
@@ -25,7 +31,12 @@ async function fetchStatus() {
 // Trigger refund distribution
 async function distributeRefunds() {
     try {
-        const response = await fetch(`${BACKEND_URL}/distribute`, { method: 'POST' });
+        const response = await fetch(`${BACKEND_URL}/distribute?x-vercel-set-bypass-cookie=true&x-vercel-protection-bypass=${BYPASS_TOKEN}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         const data = await response.json();
         if (data.success) {
             totalSolDistributed += parseFloat(data.distributed);
