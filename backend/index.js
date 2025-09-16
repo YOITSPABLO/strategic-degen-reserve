@@ -11,7 +11,7 @@ const connection = new Connection(process.env.RPC_ENDPOINT, 'confirmed');
 const TOKEN_MINT_ADDRESS = new PublicKey(process.env.TOKEN_MINT_ADDRESS);
 const DEV_FEE_WALLET = new PublicKey(process.env.DEV_FEE_WALLET);
 const TOTAL_SUPPLY = 1000000000 * 1e6; // 1B tokens with 6 decimals
-const payer = Keypair.fromSecretKey(bs58.decode(process.env.PRIVATE_KEY)); // Decode base58 private key
+const payer = Keypair.fromSecretKey(bs58.decode(process.env.PRIVATE_KEY));
 
 // Fetch all token holders
 async function fetchHolders() {
