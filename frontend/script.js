@@ -7,7 +7,7 @@ const solTallyElement = document.querySelector('.sol-tally');
 let totalSolDistributed = 0;
 let walletIndex = 0;
 const wallets = ['Wallet1', 'Wallet2', 'Wallet3']; // Mock wallets for demo scanning
-const BACKEND_URL = 'https://solrewards-1x9y6amxi-pablos-projects-26cc46ce.vercel.app'; // Updated URL
+const BACKEND_URL = 'https://solrewards-1x9y6amxi-pablos-projects-26cc46ce.vercel.app'; // Use the latest URL
 const BYPASS_TOKEN = '0QuZG5vQsYHZvaaGsOeNwoDS'; // Replace with your token
 
 // Fetch backend status

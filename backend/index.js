@@ -6,7 +6,8 @@ const { TOKEN_PROGRAM_ID, getAssociatedTokenAddress, createTransferInstruction }
 const bs58 = require('bs58');
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: 'https://strategicdegenreserve.netlify.app' })); // Restrict CORS to Netlify domain
+const cors = require('cors');
+app.use(cors({ origin: 'https://strategicdegenreserve.netlify.app' })); // Confirm this line is present
 
 // Configuration
 const connection = new Connection(process.env.RPC_ENDPOINT, 'confirmed');
