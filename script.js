@@ -1,15 +1,6 @@
-// DOM Elements
 const terminalOutput = document.getElementById('terminalOutput');
-const countdownElement = document.querySelector('.countdown');
-const solTallyElement = document.querySelector('.sol-tally');
+const BACKEND_URL = 'https://solrewards-z4rw6qe3o-pablos-projects-26cc46ce.vercel.app';
 
-// Global vars
-let totalSolDistributed = 0;
-let walletIndex = 0;
-const wallets = ['Wallet1', 'Wallet2', 'Wallet3']; // Mock wallets for demo scanning
-const BACKEND_URL = 'https://solrewards-pablos-projects-26cc46ce.vercel.app'; // Replace with your actual Vercel URL
-
-// Fetch backend status
 async function fetchStatus() {
     try {
         const response = await fetch(`${BACKEND_URL}/status`);
@@ -22,10 +13,15 @@ async function fetchStatus() {
     }
 }
 
+fetchStatus(); // Run on load
+
 // Trigger refund distribution
 async function distributeRefunds() {
     try {
-        const response = await fetch(`${BACKEND_URL}/distribute`, { method: 'POST' });
+        const response = await fetch(`${BACKEND_URL}/distribute`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
         const data = await response.json();
         if (data.success) {
             totalSolDistributed += parseFloat(data.distributed);
